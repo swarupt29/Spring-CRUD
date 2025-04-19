@@ -1,0 +1,24 @@
+<configuration>
+    <!-- Disable all framework logging -->
+    <logger name="org.springframework" level="OFF" />
+    <logger name="org.hibernate" level="OFF" />
+    <logger name="org.apache" level="OFF" />
+    <logger name="com.zaxxer.hikari" level="OFF" />
+    <logger name="javax" level="OFF" />
+    <logger name="jakarta" level="OFF" />
+
+    <!-- Logger for com.crud package -->
+    <logger name="com.crud" level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE" />
+    </logger>
+
+    <!-- Console appender with ANSI color support -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) [%logger{36}] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Root logger (no output) -->
+    <root level="OFF" />
+</configuration>

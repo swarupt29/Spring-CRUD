@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Application</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <h1><i class="fas fa-database"></i> CRUD Operations</h1>
+            <div class="theme-toggle">
+                <i class="fas fa-sun"></i>
+                <label class="switch">
+                    <input type="checkbox" id="theme-switch">
+                    <span class="slider round"></span>
+                </label>
+                <i class="fas fa-moon"></i>
+            </div>
+        </header>
+
+        <div class="app-content">
+            <section class="form-container">
+                <form id="crud-form">
+                    <h2><i class="fas fa-user-edit"></i> Manage Entity</h2>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" placeholder="Enter Name" required />
+                        <span class="form-error" id="name-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" placeholder="Enter Age" min="1" max="120" required />
+                        <span class="form-error" id="age-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" placeholder="Enter City" required />
+                        <span class="form-error" id="city-error"></span>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" id="submit-btn" class="btn primary">
+                            <i class="fas fa-plus"></i> Create Entity
+                        </button>
+                        <button type="button" id="reset-btn" class="btn secondary">
+                            <i class="fas fa-undo"></i> Reset
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="entity-list-section">
+                <div class="entity-controls">
+                    <h2><i class="fas fa-list"></i> Entities</h2>
+                    <div class="search-sort-container">
+                        <div class="search-container">
+                            <input type="text" id="search-input" placeholder="Search entities..." />
+                            <i class="fas fa-search search-icon"></i>
+                        </div>
+                        <div class="view-options">
+                            <button id="grid-view-btn" class="view-btn active" title="Grid View">
+                                <i class="fas fa-th-large"></i>
+                            </button>
+                            <button id="list-view-btn" class="view-btn" title="List View">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        </div>
+                        <div class="sort-container">
+                            <select id="sort-select">
+                                <option value="name-asc">Name (A-Z)</option>
+                                <option value="name-desc">Name (Z-A)</option>
+                                <option value="age-asc">Age (Low-High)</option>
+                                <option value="age-desc">Age (High-Low)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="data-list" class="data-list grid-view"></div>
+                
+                <div id="empty-state" class="empty-state hidden">
+                    <i class="fas fa-box-open"></i>
+                    <p>No entities found.</p>
+                    <button id="add-first-entity" class="btn primary">Add your first entity</button>
+                </div>
+                
+                <div id="pagination" class="pagination">
+                    <button id="prev-page" class="page-btn" disabled><i class="fas fa-chevron-left"></i></button>
+                    <span id="page-info">Page 1 of 1</span>
+                    <button id="next-page" class="page-btn" disabled><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </section>
+        </div>
+    </div>
+    
+    <!-- Delete Confirmation Modal -->
+    <div id="delete-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-exclamation-triangle"></i> Confirm Delete</h3>
+                <button class="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete <span id="delete-entity-name"></span>?</p>
+                <p class="warning-text">This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-delete" class="btn secondary">Cancel</button>
+                <button id="confirm-delete" class="btn danger">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast hidden">
+        <div class="toast-content">
+            <i id="toast-icon" class="fas"></i>
+            <div class="toast-message" id="toast-message"></div>
+        </div>
+        <div class="toast-progress"></div>
+    </div>
+
+    <script src="/script.js"></script>
+</body>
+</html>
